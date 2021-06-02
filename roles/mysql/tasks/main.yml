@@ -1,22 +1,18 @@
 ---
 # tasks file for mysql
-- name: "install mysql and python utilities"
+- name: Install mysql and python utilities
   apt:
     name: "mysql-server,python3-pip,libmysqlclient-dev"
     state: present
     update_cache: "{{ update_cache }}"
 
-- name: "install python module"
+- name: Install python module
   pip:
     name: "configparser,mysql-connector,PyMySQL"
     state: present
 
-- name: "enable mysql"
-  ansible.builtin.service:
-    name: mysql
-    enabled: yes
-
-- name: "start mysql"
+- name: Enable and start mysql
   ansible.builtin.service:
     name: mysql
     state: started
+    enabled: yes

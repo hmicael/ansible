@@ -1,6 +1,6 @@
 ---
 
-- name: "install php"
+- name: Install php on Debian
   apt:
     name: "php,php-mysql,php-pgsql,libapache2-mod-php"
     state: present

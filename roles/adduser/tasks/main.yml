@@ -1,6 +1,6 @@
 ---
 # tasks file for adduser
-- name: "create new user"
+- name: Create new user
   ansible.builtin.user:
     name: "{{ project_user }}"
     password: "{{ project_ssh_password }}" 
