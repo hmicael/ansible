@@ -4,7 +4,6 @@
 
 - name: "Install apache2 and MySQL"  
   hosts: dynamically_created_hosts
-  gather_facts: no
   roles:
     - role: "apache"
       php_install: yes
