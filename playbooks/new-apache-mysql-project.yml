@@ -45,7 +45,7 @@
         that: 
           - project_name | length >= 3
           - project_user | length >= 3
-          - project_ssh_password | lenght > 6
+          - project_ssh_password | length > 6
           - db_password | length > 6
           - domain_name is regex("^(no)|([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$") # no or correct domain name structure
     - pause:
