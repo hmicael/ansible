@@ -65,4 +65,4 @@
   roles:
       - role: "adduser"
       - role: "confmysql"
-      - role: "confapache"-
+      - role: "confapache"
