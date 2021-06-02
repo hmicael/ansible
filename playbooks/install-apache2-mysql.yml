@@ -7,4 +7,3 @@
   roles:
     - role: "apache"
       php_install: yes
-    - role: "mysql"

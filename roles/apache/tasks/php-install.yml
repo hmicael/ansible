@@ -2,7 +2,7 @@
 
 - name: "install php"
   apt:
-    name: "php,php-mysql,php-pgsql"
+    name: "php,php-mysql,php-pgsql,libapache2-mod-php"
     state: present
   changed_when: yes
   notify: [ "restart apache2"]
