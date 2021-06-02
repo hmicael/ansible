@@ -4,7 +4,6 @@
 
 - name: "Prompt user info"
   hosts: dynamically_created_hosts
-  gather_facts: no
 
   vars_prompt:
     - name: project_name
