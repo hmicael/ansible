@@ -3,7 +3,7 @@ dependencies:
 
 galaxy_info:
   author: Henintsoa ANDRIAMAHADIMBY
-  description: config MySQL
+  description: Config MySQL
   company: Ingenosya
 
   # If the issue tracker for your role is not on github, uncomment the
