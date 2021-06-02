@@ -1,20 +1,15 @@
 ---
 # tasks file for confapache
-
-- name: debu use_ssl
-  debug:
-    msg: "{{ use_ssl }}"
-
 - name: create the working directory if it does not exist
   ansible.builtin.file:
     path: "{{ working_dir }}"
     state: directory
     mode: "0775"
 
-#- name: clonning the repo
-#  ansible.builtin.git:
-#    repo: "{{ git_url }}"
-#    dest: "{{ working_dir }}"
+- name: clonning the repo
+  ansible.builtin.git:
+    repo: "{{ git_url }}"
+    dest: "{{ working_dir }}"
 
 # if domain_name is set to 'no', it means that Alias will be used
 # else domain_name will be used
@@ -33,13 +28,13 @@
     group: root
     mode: '0744'
 
-#- name: stop apache2 for generating SSL certificat
-#  ansible.builtin.service:
-#    name: apache2
-#    state: stop
+# - name: stop apache2 for generating SSL certificat
+#   ansible.builtin.service:
+#     name: apache2
+#     state: stop
 
-#- name: generate SSL certificate
-#  shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
+# - name: generate SSL certificate
+#   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
       
 - name: enable the site
   shell: "/usr/sbin/a2ensite {{ domain_name }}.conf"
