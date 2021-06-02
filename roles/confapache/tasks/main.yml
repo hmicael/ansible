@@ -38,7 +38,7 @@
       
 - name: enable the site
   shell: "/usr/sbin/a2ensite {{ domain_name }}.conf"
-  notify: "restart apache2"
+  notify: [ "{{ ansible_os_family }} restart apache2" ]
 
 - name: change file ownership, group and permissions of the working_dir
   ansible.builtin.file:

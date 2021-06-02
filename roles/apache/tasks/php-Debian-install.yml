@@ -5,4 +5,4 @@
     name: "php,php-mysql,php-pgsql,libapache2-mod-php"
     state: present
   changed_when: yes
-  notify: [ "restart apache2"]
+  notify: [ "{{ ansible_os_family }} restart apache2" ]

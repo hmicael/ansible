@@ -7,3 +7,8 @@
     name: "{{ apache_service }}"
     state: "started"
     enabled: yes
+
+# Cette tâche fait appel à un autre fichier de configuration pour installer PHP. Elle est exécutée uniquement si la variable php_install est à vraie (par défaut, elle est à faux)
+- name: "install php packages"
+  include: "php-{{ ansible_os_family }}-install.yml"
+  when: php_install|default(False)|bool

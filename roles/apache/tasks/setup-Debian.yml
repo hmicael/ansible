@@ -12,9 +12,4 @@
     state: present
     name: rewrite 
   changed_when: yes
-  notify: [ "restart apache2" ]
-
-# Cette tâche fait appel à un autre fichier de configuration pour installer PHP. Elle est exécutée uniquement si la variable php_install est à vraie (par défaut, elle est à faux)
-- name: "install php packages"
-  include: "php-install.yml"
-  when: php_install|default(False)|bool
+  notify: [ "{{ ansible_os_family }} restart apache2" ]
