@@ -2,10 +2,9 @@
 # tasks file for apache
 - name: "Ensure Apache is installed on Debian."
   apt:
-    name: "{{ item }}"
+    name: "{{ apache_packages }}"
     state: present
     update_cache: "{{ update_cache }}" 
-  with_items: "{{ apache_packages }}"
 
 - name: "Enable mod_rewrite"
   apache2_module:
