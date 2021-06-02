@@ -5,5 +5,5 @@
 - name: Ensure Apache has selected state and enabled on boot.
   service:
     name: "{{ apache_service }}"
-    state: "{{ apache_state }}"
+    state: "start"
     enabled: yes
