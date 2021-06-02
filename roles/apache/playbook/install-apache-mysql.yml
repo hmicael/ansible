@@ -1,0 +1,12 @@
+---
+- name: "Installation apache"
+  hosts: all
+  roles:
+    - role: "apache"
+      php_install: yes
+
+- name: "Installation mysql"
+  hosts: all
+  gather_facts: no
+  roles:
+    - role: "mysql"

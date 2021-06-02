@@ -1,0 +1,8 @@
+---
+
+- name: "install php"
+  apt:
+    name: "php,php-mysql,php-pgsql"
+    state: present
+  changed_when: yes
+  notify: [ "restart apache2"]

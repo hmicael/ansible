@@ -1,0 +1,9 @@
+---
+# defaults file for confapache
+
+working_dir: "/home/{{ project_user }}/{{ project_name }}"
+document_root: "{{ working_dir }}/{{ index_dir }}"
+sites_availabe: "/etc/apache2/sites-available"
+sites_enabled: "/etc/apache2/sites-enabled"
+admin_email: "admin@ingenosya.mg"
+use_ssl: "yes"

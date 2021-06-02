@@ -1,0 +1,30 @@
+---
+# tasks file for apache
+- name: "install apache"
+  apt:
+    name: "apache2,libapache2-mod-php,letsencrypt,git"
+    state: present
+    update_cache: "{{ update_cache }}" 
+
+- name: "enable apache2"
+  ansible.builtin.service:
+    name: apache2
+    enabled: yes
+
+- name: "start apache2"
+  ansible.builtin.service:
+    name: apache2
+    state: started
+
+- name: "enable rewrite"
+  apache2_module:
+    state: present
+    name: rewrite 
+  changed_when: yes
+  notify: [ "restart apache2" ]
+
+# Cette tâche fait appel à un autre fichier de configuration pour installer PHP. Elle est exécutée uniquement si la variable php_install est à vraie (par défaut, elle est à faux)
+- name: "install php packages"
+  include: "php-install.yml"
+  when: php_install|default(False)|bool
+
