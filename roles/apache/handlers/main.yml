@@ -1,6 +1,6 @@
 ---
 # handlers file for apache
-- name: Debian restart apache2
+- name: restart apache
   ansible.builtin.service:
-    name: apache2
+    name: "{{ apache_service }}"
     state: restarted

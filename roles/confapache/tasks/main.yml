@@ -1,4 +1,6 @@
 ---
+- include: define-variables.yml
+
 # tasks file for confapache
 - name: Create the working directory if it does not exist
   ansible.builtin.file:
@@ -11,12 +13,19 @@
     repo: "{{ git_url }}"
     dest: "{{ working_dir }}"
 
+- name: Change file ownership, group and permissions of the working_dir
+  ansible.builtin.file:
+    path: "{{ working_dir }}"
+    owner: "{{ project_user }}"
+    group: "www-data"
+    mode: "0775"
+    recurse: yes    
+
 # if domain_name is set to 'no', it means that Alias will be used
 # else domain_name will be used
 - name: Setting domain_name 
   set_fact:
-    domain_name: "{% if domain_name == 'no' %}{{ project_name  }}{% else %}{{ domain_name }}{% endif %}"
-
+    domain_name: "{% if domain_name == 'no' %}{{ project_name }}{% else %}{{ domain_name }}{% endif %}"
 
 # if domain_name is set to project_name, it means that Alias template will be used
 # else vhost template will be used
@@ -30,20 +39,16 @@
 
 # - name: Stop apache2 for generating SSL certificat
 #   ansible.builtin.service:
-#     name: apache2
+#     name: "{{ apache_service }}"
 #     state: stop
 
 # - name: Generate SSL certificate
 #   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
       
 - name: Enable the site
-  shell: "/usr/sbin/a2ensite {{ domain_name }}.conf"
-  notify: [ "{{ ansible_os_family }} restart apache2" ]
-
-- name: Change file ownership, group and permissions of the working_dir
   ansible.builtin.file:
-    path: "{{ working_dir }}"
-    owner: "{{ project_user }}"
-    group: "www-data"
-    mode: "0775"
-    recurse: yes
+    src: "{{ sites_availabe }}/{{ domain_name }}.conf"
+    dest: "{{ sites_enabled }}/{{ domain_name }}.conf"
+    owner: root
+    group: root
+    state: link

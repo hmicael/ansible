@@ -11,4 +11,4 @@
     state: present
     name: rewrite 
   changed_when: yes
-  notify: [ "{{ ansible_os_family }} restart apache2" ]
+  notify: [ "restart apache" ]

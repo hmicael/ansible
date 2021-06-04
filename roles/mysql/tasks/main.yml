@@ -8,7 +8,7 @@
     name: "configparser,mysql-connector,PyMySQL"
     state: present
 
-- name: Enable and start mysql
+- name: Enable and start mysql service
   ansible.builtin.service:
     name: mysql
     state: started

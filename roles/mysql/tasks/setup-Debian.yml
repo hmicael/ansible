@@ -1,6 +1,6 @@
 ---
 # tasks file for mysql
-- name: Install mysql and python utilities
+- name: Install MySQL and python utilities
   apt:
     name: "{{ mysql_packages }}"
     state: present

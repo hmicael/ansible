@@ -1,0 +1,3 @@
+apache_service: apache2
+sites_availabe: "/etc/apache2/sites-available"
+sites_enabled: "/etc/apache2/sites-enabled"
