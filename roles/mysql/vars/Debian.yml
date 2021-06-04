@@ -1,0 +1,5 @@
+__mysql_packages:
+  - mysql-server
+  - mysql-client
+  - python3-pip
+  - libmysqlclient-dev

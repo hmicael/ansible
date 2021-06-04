@@ -1,10 +1,7 @@
 ---
 # tasks file for mysql
-- name: Install mysql and python utilities
-  apt:
-    name: "mysql-server,python3-pip,libmysqlclient-dev"
-    state: present
-    update_cache: "{{ update_cache }}"
+- include: define-variables.yml
+- include: setup.yml
 
 - name: Install python module
   pip:

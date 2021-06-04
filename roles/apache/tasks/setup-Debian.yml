@@ -1,6 +1,6 @@
 ---
 # tasks file for apache
-- name: Ensure Apache is installed on Debian.
+- name: Install Apache on Debian.
   apt:
     name: "{{ apache_packages }}"
     state: present
