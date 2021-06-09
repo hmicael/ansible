@@ -5,3 +5,8 @@
     name: "{{ mysql_packages }}"
     state: present
     update_cache: "{{ update_cache }}" 
+
+- name: Set python3.8 as default
+  shell: /usr/bin/update-alternatives --set python /usr/bin/python3.8
+  args:
+    executable: /bin/bash
