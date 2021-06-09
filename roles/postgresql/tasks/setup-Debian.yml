@@ -1,0 +1,27 @@
+---
+# tasks file for postgresql
+
+- name: Install utilities paquets
+  apt:
+    name: "wget,curl,ca-certificates,python3-pip"
+    state: present
+    update_cache: "{{ update_cache }}"
+
+- name: Import the repository
+  shell: /usr/bin/wget -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - 
+  args:
+    executable: /bin/bash
+
+- name: Create a PPA file for PostgreSQL
+  shell: /usr/bin/sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'  
+
+- name: Set python3.8 as default
+  shell: /usr/bin/update-alternatives --set python /usr/bin/python3.8
+  args:
+    executable: /bin/bash
+
+- name: Install postgresql and python utilities
+  apt:
+    name: "{{ postgresql_packages }}"
+    state: present
+    update_cache: "{{ update_cache }}"

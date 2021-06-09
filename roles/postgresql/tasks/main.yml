@@ -1,0 +1,15 @@
+---
+# tasks file for postgresql
+- include: define-variables.yml
+- include: setup.yml
+
+- name: Install python module
+  pip:
+    name: "psycopg2"
+    state: present
+
+- name: Enable and start postgresql service
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+    enabled: yes
