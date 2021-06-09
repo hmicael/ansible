@@ -3,7 +3,7 @@
 
 - name: Install utilities paquets
   apt:
-    name: "wget,curl,ca-certificates,python3-pip"
+    name: "{{ utilities }}"
     state: present
     update_cache: "{{ update_cache }}"
 
@@ -20,7 +20,7 @@
   args:
     executable: /bin/bash
 
-- name: Install postgresql and python utilities
+- name: Install postgresql
   apt:
     name: "{{ postgresql_packages }}"
     state: present

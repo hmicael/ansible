@@ -1,6 +1,13 @@
 ---
 # tasks file for mysql
-- name: Install MySQL and python utilities
+
+- name: Install utilities
+  apt:
+    name: "{{ utilities }}"
+    state: present
+    update_cache: "{{ update_cache }}" 
+
+- name: Install MySQL
   apt:
     name: "{{ mysql_packages }}"
     state: present
