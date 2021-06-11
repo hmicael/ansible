@@ -2,4 +2,4 @@
 - name: Apache installation on RedHat
   yum:
     name: "{{ apache_packages }}"
-    state: "present"
+    state: present

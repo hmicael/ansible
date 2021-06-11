@@ -11,7 +11,7 @@
 
 - name: Install php7 on Centos
   yum:
-    name: "php,php-mysql,php-xml,php-mbstring,php-mcrypt,php-gd,php-intl"
+    name: "{{ php_packages }} - {{ php-packages_centos }}"
     state: latest
     enablerepo: "remi-php70"
   changed_when: yes

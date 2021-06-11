@@ -1,7 +1,7 @@
 ---
 - name: Install php on Fedora
   yum:
-    name: "php,php-cli,php-fpm,php-mysqlnd,php-gd,php-mcrypt,php-mbstring"
+    name: "{{ php_packages }} - {{ php_packages_fedora }}"
     state: latest
   changed_when: yes
   notify: ["restart apache"]
