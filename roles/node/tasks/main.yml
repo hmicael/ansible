@@ -3,9 +3,6 @@
 - include: define-variables.yml
 - include: setup.yml
 
-- name: Go to the project_user HOMEDIR
-  shell: cd "/home/{{ project_user }}"
-
 - name: Install NVM
   become: true
   become_user: "{{ project_user }}" 
