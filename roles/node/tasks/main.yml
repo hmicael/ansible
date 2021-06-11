@@ -6,14 +6,17 @@
 - name: Get NVM
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
   args:
+    executable: /bin/bash
     chdir: "/home/{{ project_user }}"
 
 - name: Install NVM
   shell: source ~/.bashrc
   args:
+    executable: /bin/bash
     chdir: "/home/{{ project_user }}"
 
 - name: Install latest node
   shell: nvm install node
   args:
+    executable: /bin/bash
     chdir: "/home/{{ project_user }}"
