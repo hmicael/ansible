@@ -44,6 +44,7 @@
 
 # - name: Generate SSL certificate
 #   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
+#   notify: [ "restart apache" ]
       
 - name: Enable the site
   ansible.builtin.file:
