@@ -6,6 +6,7 @@
     name: "{{ project_user }}"
     password: "{{ db_password }}"
     priv: "ALL/{{ project_name }}:ALL"
+    db: postgres
     state: present
 
 - name: Create database
