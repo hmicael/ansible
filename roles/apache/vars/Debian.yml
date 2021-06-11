@@ -7,3 +7,9 @@ __apache_packages:
   - apache2-utils
   - git
   - letsencrypt
+
+php_modules:
+  - php
+  - php-mysql
+  - php-pgsql
+  - libapache2-mod-php

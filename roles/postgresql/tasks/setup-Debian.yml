@@ -1,6 +1,10 @@
 ---
 # tasks file for postgresql
 
+- name: Install setfacl support
+  become: yes
+  apt: pkg=acl
+
 - name: Install utilities paquets
   apt:
     name: "{{ utilities }}"
