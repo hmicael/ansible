@@ -3,11 +3,11 @@
 - name: Mariadb-server installation
   yum:
     name: "{{ mysql_packages }}"
-    state: "installed"
+    state: installed
 
 # Active le service MariaDB
 - name: Start mariadb service
   service:
     name: "mariadb"
-    state: "started"
+    state: started
     enabled: yes
