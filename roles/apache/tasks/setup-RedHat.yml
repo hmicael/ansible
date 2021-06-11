@@ -1,5 +1,5 @@
 ---
-- name: "apache installation on RedHat"
+- name: Apache installation on RedHat
   yum:
     name: "{{ apache_packages }}"
     state: "present"

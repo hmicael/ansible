@@ -1,12 +1,12 @@
 ---
 # Installation des paquets mariadb serveur et son extension Python
-- name: "mariadb-server installation"
+- name: Mariadb-server installation
   yum:
     name: "{{ mysql_packages }}"
     state: "installed"
 
 # Active le service MariaDB
-- name: "start mariadb service"
+- name: Start mariadb service
   service:
     name: "mariadb"
     state: "started"

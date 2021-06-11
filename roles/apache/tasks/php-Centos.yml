@@ -1,15 +1,15 @@
 ---
-- name: "epel activation"
+- name: Epel activation
   yum:
     name: "epel-release"
     state: present
 
-- name: "remi repo activation"
+- name: Remi repo activation
   yum:
     name: "https://rpms.remirepo.net/enterprise/remi-release-7.rpm"
     state: present
 
-- name: "install php7 on Centos"
+- name: Install php7 on Centos
   yum:
     name: "php,php-mysql,php-xml,php-mbstring,php-mcrypt,php-gd,php-intl"
     state: latest
