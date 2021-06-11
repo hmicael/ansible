@@ -1,5 +1,5 @@
 ---
-# tasks file for postgresql
+# tasks file for node
 - include: define-variables.yml
 - include: setup.yml
 
