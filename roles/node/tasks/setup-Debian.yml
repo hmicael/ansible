@@ -1,0 +1,8 @@
+---
+# tasks file for postgresql
+
+- name: Install utilities paquets
+  apt:
+    name: "{{ utilities }}"
+    state: present
+    update_cache: "{{ update_cache }}"

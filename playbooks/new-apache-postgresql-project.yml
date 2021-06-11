@@ -62,6 +62,6 @@
         msg: "{{use_ssl}}"
 
   roles:
-      # - role: "adduser"
+      - role: "adduser"
       - role: "confpostgres"
-      # - role: "confapache"
+      - role: "confapache"
