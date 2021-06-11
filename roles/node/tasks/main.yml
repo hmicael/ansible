@@ -10,7 +10,7 @@
     chdir: "/home/{{ project_user }}"
 
 - name: Install NVM
-  shell: source ~/.bashrc
+  shell: source "/home/{{ project_user }}"
   args:
     executable: /bin/bash
     chdir: "/home/{{ project_user }}"
@@ -18,5 +18,4 @@
 - name: Install latest node
   shell: nvm install node
   args:
-    executable: /bin/bash
     chdir: "/home/{{ project_user }}"
