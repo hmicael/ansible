@@ -22,3 +22,9 @@
   shell: /usr/bin/update-alternatives --set python /usr/bin/python3
   args:
     executable: /bin/bash
+
+- name: Enable and start mysql service
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: yes

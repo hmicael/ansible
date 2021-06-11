@@ -1,0 +1,2 @@
+__mysql_packages:
+  - mariadb-server
