@@ -24,5 +24,4 @@
           - project_ssh_password | length > 6
 
   roles:
-      - role: "adduser"
       - role: "node"
