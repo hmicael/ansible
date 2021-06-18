@@ -11,8 +11,8 @@
 
 - name: Install php7 on Centos
   yum:
-    name: "{{ php_packages }} - {{ php-packages_centos }}"
+    name: "{{ php_packages + php_packages_centos }}"
     state: latest
     enablerepo: "remi-php70"
   changed_when: yes
-  notify: ["apache restart"]
+  notify: ["restart apache"]
