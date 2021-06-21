@@ -8,16 +8,6 @@
     mode: '0744'
   notify: ["restart httpd"]
 
-- name: Enable httpd
-  service:
-    name: "{{ apache_service }}"
-    enabled: yes
-
-- name: Start httpd
-  service:
-    name: "{{ apache_service }}"
-    state: started
-
 - name: Add firewall rule
   firewalld:
     service: https
