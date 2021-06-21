@@ -13,18 +13,18 @@ __apache_packages:
   - mod_ssl
   - openssh
 
-__php_packages:
+php_packages:
   - php
   - php-mbstring
   - php-mcrypt
   - php-gd
 
-__php_packages_centos:
+php_packages_centos:
   - php-mysql
   - php-xml
   - php-intl
 
-__php_packages_fedora:
+php_packages_fedora:
   - php-cli
   - php-fpm
   - php-mysqlnd
