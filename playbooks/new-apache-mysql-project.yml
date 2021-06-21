@@ -60,6 +60,5 @@
       when: use_ssl['user_input'] is defined
 
   roles:
-      - role: "adduser"
       - role: "confmysql"
       - role: "confapache"
