@@ -30,6 +30,6 @@
     mode: "0755"
 
 - name: Put SELinux in permissive mode
-  ansible.posix.selinux:
+  selinux:
     policy: targeted
     state: permissive
