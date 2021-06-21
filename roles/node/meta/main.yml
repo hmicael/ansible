@@ -1,10 +1,9 @@
 dependencies:
-  - role: "apache"
   - role: "adduser"
 
 galaxy_info:
   author: Henintsoa ANDRIAMAHADIMBY
-  description: Config apache2
+  description: Install Node via NVM
   company: Ingenosya
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -50,4 +49,4 @@ galaxy_info:
     #
     # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
     #       Maximum 20 tags per role.
-
+    
