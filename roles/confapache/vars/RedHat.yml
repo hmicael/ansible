@@ -1,4 +1,3 @@
 apache_service: httpd
 apache_user: apache
 sites_availabe: "/etc/httpd/conf.d"
-sites_enabled: "/etc/httpd/conf.d/site-enabled"
