@@ -1,0 +1,23 @@
+---
+#- name: Epel activation
+#  yum:
+#    name: "epel-release"
+#    state: present
+
+- name: Stop service apache
+  service:
+    name: "httpd"
+    state: stopped
+    enabled: no
+
+- name: Install nginx
+  yum:
+    name: "nginx"
+    state: present
+  notify: ["restart nginx"]
+
+- name: Enable service nginx
+  service:
+    name: "nginx"
+    state: started
+    enabled: yes
