@@ -1,0 +1,10 @@
+server {
+        #root {{ document_root }};
+        index index.html index.htm index.nginx-debian.html index.php index.php4 index.php5;
+
+        #server_name _;
+
+        location /{{ domaine_name }} {
+           root {{ document_root }}
+        }
+}
