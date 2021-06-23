@@ -6,7 +6,7 @@
     owner: apache
     group: apache
     mode: '0744'
-  notify: ["restart httpd"]
+  notify: ["restart nginx"]
 
 # - name: Stop apache2 for generating SSL certificat
 #   ansible.builtin.service:
