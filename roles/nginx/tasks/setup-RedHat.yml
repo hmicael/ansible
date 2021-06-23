@@ -1,0 +1,12 @@
+---
+- name: Epel activation
+  yum:
+    name: "epel-release"
+    state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: Install nginx
+  yum:
+    name: "nginx"
+    state: present
+  notify: ["restart nginx"]

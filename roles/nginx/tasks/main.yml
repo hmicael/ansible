@@ -1,20 +1,13 @@
 ---
-#- name: Epel activation
-#  yum:
-#    name: "epel-release"
-#    state: present
+- include: define-variables.yml
 
 - name: Stop service apache
   service:
-    name: "httpd"
+    name: "{{ apache_service }}"
     state: stopped
     enabled: no
 
-- name: Install nginx
-  yum:
-    name: "nginx"
-    state: present
-  notify: ["restart nginx"]
+- include: setup.yml
 
 - name: Enable service nginx
   service:
