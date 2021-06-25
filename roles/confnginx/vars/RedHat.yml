@@ -1,3 +1,3 @@
 apache_service: nginx
-apache_user: apache
-sites_available: "/etc/nginx/conf.d"
+apache_user: nginx
+sites_available: "/etc/nginx/default.d"
