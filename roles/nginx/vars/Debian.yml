@@ -1,2 +1,8 @@
 ---
 apache_service: apache2
+
+php_modules:
+  - php
+  - php-mysql
+  - php-pgsql
+  - php-fpm

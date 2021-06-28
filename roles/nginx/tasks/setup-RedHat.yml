@@ -10,3 +10,9 @@
     name: "nginx"
     state: present
   notify: ["restart nginx"]
+
+- name: Install php on Fedora
+  yum:
+    name: "{{ php_modules }}"
+    state: latest
+  changed_when: yes

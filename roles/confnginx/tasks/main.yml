@@ -27,8 +27,8 @@
   set_fact:
     domain_name: "{% if domain_name == 'no' %}{{ project_name }}{% else %}{{ domain_name }}{% endif %}"
 
-#- include: setup-RedHat.yml
-#  when: ansible_os_family == 'RedHat'
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-#- include: setup-Debian.yml
-#  when: ansible_os_family == 'Debian'
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
