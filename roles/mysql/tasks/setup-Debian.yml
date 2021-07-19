@@ -5,13 +5,13 @@
   apt:
     name: "{{ utilities }}"
     state: present
-    update_cache: "{{ update_cache }}" 
+    #update_cache: "{{ update_cache }}" 
 
 - name: Install MySQL
   apt:
     name: "{{ mysql_packages }}"
     state: present
-    update_cache: "{{ update_cache }}" 
+    #update_cache: "{{ update_cache }}" 
 
 - name: Install alternatives of python3
   shell: /usr/bin/update-alternatives --install /usr/bin/python python /usr/bin/python3 1

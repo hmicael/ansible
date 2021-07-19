@@ -9,7 +9,7 @@
   apt_repository:
     repo: 'ppa:ondrej/php'
     state: 'present'
-    update_cache: yes
+    update_cache: "{{ update_cache }}"
 
 - name: Install php on Debian
   apt:
