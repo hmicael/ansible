@@ -28,3 +28,11 @@
     name: mysql
     state: started
     enabled: yes
+
+- name: Add my.cnf to /root
+  template:
+    src: my.cnf
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: '0744'
