@@ -35,4 +35,5 @@
     dest: /root/.my.cnf
     owner: root
     group: root
-    mode: '0744'
+    mode: '0600'
+    force: no # the file will only be transferred if the destination does not exist
