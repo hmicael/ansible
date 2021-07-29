@@ -6,3 +6,6 @@ php_modules:
   - php-mysql
   - php-pgsql
   - php-fpm
+  - php-mbstring
+  - php-mcrypt
+  - php-gd
