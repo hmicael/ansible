@@ -28,12 +28,3 @@
     name: mysql
     state: started
     enabled: yes
-
-- name: Add my.cnf to /root
-  template:
-    src: my.cnf
-    dest: /root/.my.cnf
-    owner: root
-    group: root
-    mode: '0600'
-    force: no # the file will only be transferred if the destination does not exist
