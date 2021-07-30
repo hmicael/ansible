@@ -16,3 +16,4 @@
     name: "{{ php_modules }}"
     state: present
   changed_when: yes
+  when: php_install|default(False)|bool
