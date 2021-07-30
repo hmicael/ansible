@@ -64,6 +64,5 @@
       when: use_ssl['user_input'] is defined
 
   roles:
-    - role: "adduser"
     - role: "confpostgres"
     - role: "confapache"
