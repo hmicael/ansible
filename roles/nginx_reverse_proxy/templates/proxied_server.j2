@@ -1,6 +1,6 @@
 #{{ project_name }} server
 upstream {{ project_name }} {
-    server {{ proxied_server_ip }};
+    server {{ proxied_server_ip }}:{{ proxied_port }};
 }
 
 server {
@@ -23,7 +23,7 @@ server {
     # Redirect requests to {{ project_name }} backend server
     location / {
         #proxy_redirect off;
-        proxy_pass http://{{ project_name }}:{{ proxied_port }};
+        proxy_pass http://{{ project_name }};
     }
 
     # common gzip
