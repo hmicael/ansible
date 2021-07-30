@@ -1,5 +1,5 @@
-apache_service: nginx
-apache_user: www-data
+nginx_service: nginx
+nginx_user: nginx
 url_php_fpm: /var/run/php/php-fpm.sock
 sites_available: "/etc/nginx/alias.d"
 sites_enabled: "/etc/nginx/sites-enabled"

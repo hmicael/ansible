@@ -2,6 +2,12 @@
 # tasks file for confnginx
 - include: define-variables.yml
 
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
 - name: Create the working directory if it does not exist
   ansible.builtin.file:
     path: "{{ working_dir }}"
@@ -17,7 +23,7 @@
   ansible.builtin.file:
     path: "{{ working_dir }}"
     owner: "{{ project_user }}"
-    group: "{{ apache_user }}"
+    group: "{{ nginx_user }}"
     mode: "0775"
     recurse: yes    
 
@@ -26,9 +32,3 @@
 - name: Setting domain_name 
   set_fact:
     domain_name: "{% if domain_name == 'no' %}{{ project_name }}{% else %}{{ domain_name }}{% endif %}"
-
-- include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
-
-- include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
