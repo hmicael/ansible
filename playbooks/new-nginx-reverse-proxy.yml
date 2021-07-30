@@ -31,7 +31,9 @@
     - assert:
         that: 
           - project_name | length >= 3
-          - proxied_server_ip | length >= 3
+          # - proxied_server_ip | length >= 3
+          - proxied_port > 0
+          - proxied_port <= 65535
           - domain_name is regex("^(no)|([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$") # no or correct domain name structure
 
   roles:
