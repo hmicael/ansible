@@ -13,5 +13,4 @@ php_modules:
   - php-mysql
   - php-pgsql
   - php-mbstring
-  - php-mcrypt
   - php-gd

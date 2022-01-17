@@ -12,6 +12,7 @@
   ansible.builtin.git:
     repo: "{{ git_url }}"
     dest: "{{ working_dir }}"
+  when: git_url != "no"
 
 - name: Change file ownership, group and permissions of the working_dir
   ansible.builtin.file:

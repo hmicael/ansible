@@ -1,5 +1,5 @@
 ---
-- name: Add apache site configuration files.
+- name: Add httpd site configuration files.
   template:
     src: "{% if domain_name == project_name %}alias.j2{% else %}vhost.j2{% endif %}"
     dest: "{{ sites_availabe }}/{{ domain_name }}.conf"
@@ -8,14 +8,16 @@
     mode: '0744'
   notify: ["restart httpd"]
 
-# - name: Stop apache2 for generating SSL certificat
+# - name: Stop httpd for generating SSL certificat
 #   ansible.builtin.service:
 #     name: "{{ apache_service }}"
-#     state: stop
+#     state: stopped
+#   when: use_ssl == "yes"
 
 # - name: Generate SSL certificate
 #   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
-#   notify: [ "restart apache" ]
+#   notify: [ "restart httpd" ]
+#   when: use_ssl == "yes"
 
 - name: Add firewall rule
   firewalld:
