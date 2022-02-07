@@ -14,3 +14,5 @@ php_modules:
   - php-pgsql
   - php-mbstring
   - php-gd
+  - php-cli
+  - unzip

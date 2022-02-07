@@ -29,19 +29,21 @@
     mode: '0744'
   notify: ["restart nginx"]
 
-# - name: Stop nginx for generating SSL certificat
-#   ansible.builtin.service:
-#     name: "{{ nginx_service }}"
-#     state: stop
+- name: Stop nginx for generating SSL certificat
+  ansible.builtin.service:
+    name: "{{ nginx_service }}"
+    state: stopped
+  when: use_ssl == "yes"
 
-# - name: Generate SSL certificate
-#   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
-#   notify: [ "restart nginx" ]
+- name: Generate SSL certificate
+  shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
+  notify: [ "restart nginx" ]
+  when: use_ssl == "yes"
       
-#- name: Enable the site
-#  ansible.builtin.file:
-#    src: "{{ sites_available }}/{{ domain_name }}.conf"
-#    dest: "{{ sites_enabled }}/{{ domain_name }}.conf"
-#    owner: root
-#    group: root
-#    state: link
+- name: Enable the site
+ ansible.builtin.file:
+   src: "{{ sites_available }}/{{ domain_name }}.conf"
+   dest: "{{ sites_enabled }}/{{ domain_name }}.conf"
+   owner: root
+   group: root
+   state: link

@@ -41,6 +41,7 @@
 
     - name: git_url
       prompt: Enter the git url of projet 
+      default: "no"
       private: no
 
     - name: update_cache

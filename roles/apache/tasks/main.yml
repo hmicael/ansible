@@ -12,3 +12,5 @@
 - name: Install php packages
   include: "php-{{ ansible_os_family }}-install.yml"
   when: php_install|default(False)|bool
+
+- include: install-composer.yml
