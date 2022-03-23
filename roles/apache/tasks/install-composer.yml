@@ -2,9 +2,12 @@
 
 - name: Download composer.phar
   get_url:
-    url: https://getcomposer.org/installer -o composer-setup.php
-    dest: ~
+    url: https://getcomposer.org/installer
+    dest: /root/composer-setup.php
     mode: '0440'
 
-- name: Generate SSL certificate
+- name: Install composer
   shell: "/usr/bin/php composer-setup.php --install-dir=/usr/bin --filename=composer"
+  args:
+    executable: /bin/bash
+    chdir: "/root"

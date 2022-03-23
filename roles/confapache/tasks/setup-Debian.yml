@@ -16,10 +16,10 @@
     state: stopped
   when: use_ssl == "yes"
 
-- name: Generate SSL certificate
-  shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
-  notify: [ "restart apache" ]
-  when: use_ssl == "yes"
+# - name: Generate SSL certificate
+#   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
+#   notify: [ "restart apache" ]
+#   when: use_ssl == "yes"
       
 - name: Enable the site
   ansible.builtin.file:
