@@ -8,6 +8,7 @@
     password: "{{ db_password }}"
     db: postgres
     state: present
+    port: "{{ pg_port }}"
 
 - name: Create database
   become: true
@@ -16,3 +17,4 @@
     name: "{{ project_name }}"
     owner: "{{ project_user }}"
     state: present
+    port: "{{ pg_port }}"
