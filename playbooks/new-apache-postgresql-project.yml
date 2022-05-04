@@ -24,11 +24,16 @@
     - name: db_password
       prompt: Enter the database password (lenght > 6)
       confirm: yes
-      unsafe: yes # allow special characters 
+      unsafe: yes # allow special characters
 
     - name: index_dir 
       prompt: Enter the project relative location of the index file (leave blank if it's /)
       private: no
+
+    - name: pg_port 
+      prompt: Enter PostgreSQL port
+      private: no
+      default: 5432
 
     - name: domain_name
       prompt: Enter the domain name (type no if, you want to use Alias)
