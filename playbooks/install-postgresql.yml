@@ -7,3 +7,9 @@
   roles:
     - role: "postgresql"
 
+  vars_prompt:
+    - name: update_cache
+      prompt: Enter yes or no to update paquet list cache
+      default: no
+      private: no
+
