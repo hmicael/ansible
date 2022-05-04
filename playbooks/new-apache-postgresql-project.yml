@@ -48,6 +48,7 @@
     - name: update_cache
       prompt: Enter yes or no to update paquet list cache
       private: no
+      default: "no"
 
   pre_tasks:
     - assert:
