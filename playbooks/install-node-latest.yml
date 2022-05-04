@@ -17,15 +17,22 @@
       salt_size: 7
       unsafe: yes # allow special characters
 
+    - name: node_version
+      prompt: Enter the node version
+      default: 12
+      private: no 
+
     - name: update_cache
       prompt: Enter yes or no to update paquet list cache
       private: no 
+      default: "no"
 
   pre_tasks:
     - assert:
         that: 
           - project_user | length >= 3
           - project_ssh_password | length > 6
+          - node_version is regex("\d+")
 
   roles:
       - role: "node"
