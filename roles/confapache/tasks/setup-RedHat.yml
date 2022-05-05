@@ -8,17 +8,6 @@
     mode: '0744'
   notify: ["restart httpd"]
 
-# - name: Stop httpd for generating SSL certificat
-#   ansible.builtin.service:
-#     name: "{{ apache_service }}"
-#     state: stopped
-#   when: use_ssl == "yes"
-
-# - name: Generate SSL certificate
-#   shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
-#   notify: [ "restart httpd" ]
-#   when: use_ssl == "yes"
-
 - name: Add firewall rule
   firewalld:
     service: https
