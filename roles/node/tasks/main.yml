@@ -19,7 +19,7 @@
     executable: /bin/bash
     chdir: "/home/{{ project_user }}"
 
-- name: Install node "{{ project_user }}"
+- name: Install node
   become: true
   become_user: "{{ project_user }}"
   shell: source "/home/{{ project_user }}/.nvm/nvm.sh" && nvm install "{{ node_version }}" && nvm alias default "{{ node_version }}"

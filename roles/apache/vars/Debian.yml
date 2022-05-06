@@ -6,7 +6,6 @@ __apache_packages:
   - libapache2-mod-php
   - apache2-utils
   - git
-  - letsencrypt
 
 php_modules:
   - php

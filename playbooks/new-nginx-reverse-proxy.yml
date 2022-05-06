@@ -35,6 +35,21 @@
           - proxied_port > 0
           # - proxied_port < 65535
           - domain_name is regex("^(no)|([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$") # no or correct domain name structure
+    - pause:
+        prompt: Do you want SSL encryption [yes|no]
+      when: domain_name != "no"
+      register: use_ssl
+    - assert:
+        that:
+          - use_ssl['user_input'] is regex("^(yes)|(no)$")
+      when: use_ssl['user_input'] is defined
+    - set_fact:
+        use_ssl: "{{ use_ssl['user_input'] }}"
+      when: use_ssl['user_input'] is defined
 
   roles:
+    - role: "letsencrypt"
+      when: use_ssl == True
+      vars:
+        webserver: "nginx"
     - role: "nginx_reverse_proxy"

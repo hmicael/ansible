@@ -4,5 +4,21 @@
 
 - name: Generate letsencrypt certificate
   hosts: dynamically_created_hosts
+
+  vars_prompt:
+  - name: domain_name
+    prompt: Enter the domain name 
+    private: no
+
+  - name: webserver
+    prompt: Enter the webserver type [apache|nginx]
+    private: no
+
+  pre_tasks:
+    - assert:
+        that:
+          - domain_name is regex("^(no)|([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$")
+          - webserver is regex("apache|nginx|httpd")
+
   roles:
     - role: "letsencrypt"

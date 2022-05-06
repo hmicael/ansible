@@ -1,1 +1,2 @@
 apache_dir: "/var/www"
+update_cache: "no"

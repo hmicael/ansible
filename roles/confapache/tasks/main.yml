@@ -33,16 +33,3 @@
 
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
-
-- name: Stop Apache for generating SSL certificat
-  ansible.builtin.service:
-    name: "{{ apache_service }}"
-    state: stopped
-  when: use_ssl == "yes"
-
-- name: Generate SSL certificate
-  shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ admin_email }} --renew-by-default"
-  notify: [ "restart httpd" ]
-  when: use_ssl == "yes"
-  args:
-    executable: /bin/bash

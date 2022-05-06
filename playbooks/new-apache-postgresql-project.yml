@@ -72,4 +72,8 @@
 
   roles:
     - role: "confpostgres"
+    - role: "letsencrypt"
+      when: use_ssl == True
+      vars:
+        webserver: "apache"
     - role: "confapache"
