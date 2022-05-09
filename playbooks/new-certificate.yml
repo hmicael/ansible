@@ -14,6 +14,11 @@
     prompt: Enter the webserver type [apache|nginx]
     private: no
 
+  - name: update_cache
+    prompt: Enter the webserver type [apache|nginx]
+    default: "no"
+    private: no
+
   pre_tasks:
     - assert:
         that:
