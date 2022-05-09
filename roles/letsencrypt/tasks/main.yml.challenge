@@ -1,0 +1,43 @@
+---
+- name: "Create letsencrypt_dir directory"
+  file:
+    path: "{{ letsencrypt_dir }}/{{ domain_name }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=x,o=x
+
+- name: "Generate a Let's Encrypt account key"
+  shell: "if [ ! -f {{ account_key_src }} ]; then openssl genrsa 4096 | sudo tee {{ account_key_src }}; fi"
+
+- name: "Generate Let's Encrypt private key"
+  shell: "openssl genrsa 4096 | sudo tee {{ letsencrypt_dir }}/{{ domain_name }}/privkey.pem"
+
+- name: "Generate Let's Encrypt CSR"
+  shell: "openssl req -new -sha256 -key {{ letsencrypt_dir }}/{{ domain_name }}/privkey.pem -subj \"/CN={{ domain_name }}\" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf \"\n[SAN]\nsubjectAltName=DNS:{{ domain_name }},DNS:www.{{ domain_name }}\")) | sudo tee {{ letsencrypt_dir }}/{{ domain_name }}/{{ domain_name }}.csr"
+  args:
+    executable: /bin/bash
+
+- name: Create a challenge using a account key from a variable.
+  community.crypto.acme_certificate:
+    terms_agreed: yes
+    acme_version: "{{ acme_version }}"
+    account_key_src: "{{ account_key_src }}"
+    acme_directory: "{{ acme_directory }}"
+    csr: "{{ letsencrypt_dir }}/{{ domain_name }}/{{ domain_name }}.csr"
+    dest: "{{ letsencrypt_dir }}/{{ domain_name }}/cert.pem"
+    chain_dest: "{{ letsencrypt_dir }}/{{ domain_name }}/chain.pem"
+    fullchain_dest: "{{ letsencrypt_dir }}/{{ domain_name }}/fullchain.pem"
+    remaining_days: 91
+  register: sample_com_challenge
+
+- name: Let the challenge be validated and retrieve the cert and intermediate certificate
+  community.crypto.acme_certificate:
+    acme_version: "{{ acme_version }}"
+    acme_directory: "{{ acme_directory }}"
+    account_key_src: "{{ account_key_src }}"
+    csr: "{{ letsencrypt_dir }}/{{ domain_name }}/{{ domain_name }}.csr"
+    dest: "{{ letsencrypt_dir }}/{{ domain_name }}/cert.pem"
+    chain_dest: "{{ letsencrypt_dir }}/{{ domain_name }}/chain.pem"
+    fullchain_dest: "{{ letsencrypt_dir }}/{{ domain_name }}/fullchain.pem"
+    data: "{{ sample_com_challenge }}"

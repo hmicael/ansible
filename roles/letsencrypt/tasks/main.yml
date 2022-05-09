@@ -1,0 +1,31 @@
+---
+- name: Install letsencrypt
+  apt:
+    name: letsencrypt
+    state: present
+    update_cache: "{{ update_cache }}"
+
+- name: Set weberser apache2 for Debian
+  set_fact:
+    webserver: "apache2"
+  when: ansible_os_family == 'Debian' and webserver != 'nginx'
+
+- name: Set weberser httpd for RedHat
+  set_fact:
+    webserver: "httpd"
+  when: ansible_os_family == 'RedHat' and webserver != 'nginx'
+
+- name: Stop Webserver for generating SSL certificat
+  ansible.builtin.service:
+    name: "{{ webserver }}"
+    state: stopped
+
+- name: Generate SSL certificate
+  shell: "/usr/bin/letsencrypt certonly --standalone --agree-tos -d {{ domain_name }} --email {{ acme_email }} --renew-by-default"
+  args:
+    executable: /bin/bash
+
+- name: Start Webserver for generating SSL certificat
+  ansible.builtin.service:
+    name: "{{ webserver }}"
+    state: started    
