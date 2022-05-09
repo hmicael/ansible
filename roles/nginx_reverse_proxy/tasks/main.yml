@@ -1,6 +1,18 @@
 ---
-# tasks file for confnginx
 - include: define-variables.yml
+
+- name: Generate DH Parameters with a different size (4096 bits)
+  community.crypto.openssl_dhparam:
+    path: /etc/letsencrypt/ssl-dhparams.pem # or /etc/ssl/certs/dhparam.pem
+    size: 4096
+
+- name: Add options-ssl-nginx.conf
+  ansible.builtin.copy:
+    src: ../templates/options-ssl-nginx.conf
+    dest: /etc/letsencrypt/options-ssl-nginx.conf # or /etc/ssl/options-ssl-nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Add vhost configuration files.
   template:

@@ -1,22 +1,27 @@
-#{{ project_name }} server
+# {{ project_name }} server
 upstream {{ project_name }} {
     server {{ proxied_server_ip }}:{{ proxied_port }};
 }
 
 server {
-    listen 80;
-    server_name {{ domain_name }};
-    proxy_read_timeout 720s;
-    proxy_connect_timeout 720s;
-    proxy_send_timeout 720s;
-    client_max_body_size 1024M;
-    # Add Headers for {{ project_name }} proxy mode
-    proxy_set_header X-Forwarded-Host $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Real-IP $remote_addr;
+    listen   80;
+    server_name  {{ domain_name }};
+    return 301 https://$host$request_uri;
+}
 
-    # log
+server {
+    listen 443;
+    server_name {{ domain_name }};
+    client_max_body_size 1024M;
+
+    add_header Strict-Transport-Security max-age=63072000;
+    add_header X-Frame-Options DENY;
+    add_header X-Content-Type-Options nosniff;
+    
+    # Add Headers for {{ project_name }} proxy mode
+    include /etc/nginx/proxy_params;
+
+    # Log
     access_log /var/log/nginx/{{ project_name }}.access.log;
     error_log /var/log/nginx/{{ project_name }}.error.log;
 
@@ -25,6 +30,19 @@ server {
         #proxy_redirect off;
         proxy_pass http://{{ project_name }};
     }
+
+    # Error
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+            root   /var/www/nginx-default;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/{{ domain_name }}/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    #include /etc/ssl/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+    #ssl_dhparam /etc/ssl/certs/dhparam.pem; # managed by Certbot
 
     # common gzip
     gzip_types text/css text/scss text/plain text/xml application/xml application/json application/javascript;
