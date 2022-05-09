@@ -1,0 +1,46 @@
+---
+- name: Include hosts playbook
+  import_playbook: host.yml # include the host.yml to ask the target host to which the playbook should be run
+
+- name: Prompt user info
+  hosts: dynamically_created_hosts
+
+  vars_prompt:
+    - name: proxied_server_ip
+      prompt: Enter the proxied server IP
+      private: no
+
+    - name: proxied_port
+      prompt: Enter the proxied port
+      private: no
+      default: 80
+
+    - name: domain_name
+      prompt: Enter the domain name
+      private: no
+
+  pre_tasks:
+    - assert:
+        that: 
+          - proxied_server_ip is regex("\d+")
+          - (proxied_port | int) > 0
+          - (proxied_port | int) < 65535
+          - domain_name is regex("^(no)|([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$") # no or correct domain name structure
+    - pause:
+        prompt: Do you want SSL encryption [yes|no]
+      when: domain_name != "no"
+      register: use_ssl
+    - assert:
+        that:
+          - use_ssl['user_input'] is regex("^(yes)|(no)$")
+      when: use_ssl['user_input'] is defined
+    - set_fact:
+        use_ssl: "{{ use_ssl['user_input'] }}"
+      when: use_ssl['user_input'] is defined
+
+  roles:
+    - role: "letsencrypt"
+      when: use_ssl == True
+      vars:
+        webserver: "apache"
+    - role: "apache_reverse_proxy"
