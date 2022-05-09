@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+    ServerName {{ domain_name }}
+
+    <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteCond %{HTTPS} !=on
+            RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,QSA,R=permanent]
+    </IfModule>
+</Virtualhost>
+
+<VirtualHost *:443>
+    ServerName {{ domain_name }}
+    SSLProxyEngine on
+    SSLCACertificateFile /etc/letsencrypt/live/{{ domain_name }}/cert.pem
+    ErrorLog /var/log/apache2/{{ domain_name }}_error_log
+    CustomLog  /var/log/apache2/{{ domain_name }}_access_log combined
+    RequestHeader set "X-Forwarded-Proto""https"
+    SetEnv proxy-nokeepalive 1
+
+    ProxyPass / http://{{ proxied_server_ip }}:{{ proxied_port }}/
+    ProxyPassReverse / http://{{ proxied_server_ip }}:{{ proxied_port }}/
+    ProxyErrorOverride off
+      
+    SetEnv proxy-nokeepalive 1
+    SSLEngine                   On
+    SSLCertificateFile          /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem
+    SSLCertificateKeyFile       /etc/letsencrypt/live/{{ domain_name }}/privkey.pem 
+</VirtualHost>

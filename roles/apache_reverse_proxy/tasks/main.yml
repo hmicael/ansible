@@ -1,0 +1,26 @@
+---
+- include: define-variables.yml
+
+- name: Enable apache proxy modules
+  apache2_module:
+    state: present
+    name: "{{ apache_modules }}"
+  changed_when: yes
+  notify: [ "restart apache" ]
+
+- name: Add vhost configuration files.
+  template:
+    src: proxied_server.j2
+    dest: "{{ sites_availabe }}/{{ domain_name }}.conf"
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: Enable the site
+  ansible.builtin.file:
+    src: "{{ sites_availabe }}/{{ domain_name }}.conf"
+    dest: "{{ sites_enabled }}/{{ domain_name }}.conf"
+    owner: root
+    group: root
+    state: link
+  notify: ["reload apache"]
