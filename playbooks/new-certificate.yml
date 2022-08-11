@@ -15,7 +15,7 @@
     private: no
 
   - name: update_cache
-    prompt: Enter the webserver type [apache|nginx]
+    prompt: Do you want to update cache ?
     default: "no"
     private: no
 
